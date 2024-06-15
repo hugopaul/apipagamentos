@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api/payments")
-@Slf4j
 @RestController
 public class PaymentController {
 
@@ -18,7 +17,7 @@ public class PaymentController {
 
     @PostMapping
     public ResponseEntity<String> pagamento(@RequestBody Produto produto){
-        log.info("pagamento recebido, {}", produto.toString());
+        System.out.println("pagamento recebido" + produto.toString());
         return paymentService.executePayment(produto);
     }
 
