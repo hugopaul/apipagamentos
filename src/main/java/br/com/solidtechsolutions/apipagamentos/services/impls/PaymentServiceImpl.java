@@ -48,6 +48,7 @@ public class PaymentServiceImpl implements PaymentService {
             List<PreferenceItemRequest> items = new ArrayList<>();
             items.add(itemRequest);
 
+
             PreferenceFreeMethodRequest freeMethod =
                     PreferenceFreeMethodRequest.builder()
                             .id(1L).build();
