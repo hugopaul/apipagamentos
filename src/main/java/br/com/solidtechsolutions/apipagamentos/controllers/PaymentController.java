@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api/payments")
 @RestController
+@Slf4j
+@CrossOrigin(origins = "*")
 public class PaymentController {
 
     @Autowired
@@ -17,7 +19,7 @@ public class PaymentController {
 
     @PostMapping
     public ResponseEntity<String> pagamento(@RequestBody Produto produto){
-        System.out.println("pagamento recebido" + produto.toString());
+        log.info("pagamento recebido" + produto.toString());
         return paymentService.executePayment(produto);
     }
 
