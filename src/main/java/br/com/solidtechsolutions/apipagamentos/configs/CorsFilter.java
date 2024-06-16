@@ -34,9 +34,7 @@ public class CorsFilter implements Filter {
     }
 
     private boolean isOriginAllowed(String origin) {
-        // Verifique se a origem é permitida
-        // Substitua pela lógica que você usa para determinar se a origem é permitida
-        return origin.equals("http://172.233.25.92:5001");
+        return origin.equals("https://solidtechsolutions.com.br/");
     }
 
     @Override
