@@ -44,7 +44,6 @@ public class PaymentServiceImpl implements PaymentService {
                             .currencyId("BRL")
                             .unitPrice(parsePrice(produto.getPrice()))
                             .build();
-
             List<PreferenceItemRequest> items = new ArrayList<>();
             items.add(itemRequest);
             PreferenceFreeMethodRequest freeMethod =
