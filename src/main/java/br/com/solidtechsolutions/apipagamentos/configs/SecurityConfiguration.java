@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.servlet.Filter;
+
 @Configuration
 public class SecurityConfiguration implements WebMvcConfigurer {
 
@@ -15,6 +17,11 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 .allowedOrigins("http://172.233.25.92:5001/**")
                 .allowedHeaders("*")
                 .allowedMethods( "POST");
+    }
+
+    @Bean
+    public Filter corsFilter() {
+        return new CorsFilter();
     }
 
 }
