@@ -32,7 +32,6 @@ public class PaymentServiceImpl implements PaymentService {
 
             MercadoPagoConfig.setAccessToken(authToken);
             PreferenceClient client = new PreferenceClient();
-
             PreferenceItemRequest itemRequest =
                     PreferenceItemRequest.builder()
                             .id(String.valueOf(produto.getId()))
@@ -44,7 +43,6 @@ public class PaymentServiceImpl implements PaymentService {
                             .currencyId("BRL")
                             .unitPrice(parsePrice(produto.getPrice()))
                             .build();
-
             List<PreferenceItemRequest> items = new ArrayList<>();
             items.add(itemRequest);
             PreferenceFreeMethodRequest freeMethod =
@@ -52,7 +50,6 @@ public class PaymentServiceImpl implements PaymentService {
                             .id(1L).build();
             List<PreferenceFreeMethodRequest> freeMethodList = new ArrayList<>();
             freeMethodList.add(freeMethod);
-
             List<PreferencePaymentTypeRequest> excludedPaymentTypes = new ArrayList<>();
             excludedPaymentTypes.add(PreferencePaymentTypeRequest.builder().id("ticket").build());
 
