@@ -14,7 +14,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry){
         registry.addMapping("/**")
-                .allowedOrigins("https://solidtechsolutions.com.br/")
+                .allowedOrigins("/**")
                 .allowedHeaders("*")
                 .allowedMethods( "POST")
                 .allowCredentials(true);
