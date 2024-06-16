@@ -27,7 +27,7 @@ public class CorsFilter implements Filter {
         String origin = httpRequest.getHeader("Origin");
 
         if (origin != null && !isOriginAllowed(origin)) {
-            logger.warning("CORS request from origin " + origin + " is not allowed.");
+            System.out.println("CORS request from origin " + origin + " is not allowed.");
         }
 
         chain.doFilter(request, response);
