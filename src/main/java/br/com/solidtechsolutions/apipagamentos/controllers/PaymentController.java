@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/payments")
 @RestController
 @Slf4j
-@CrossOrigin(origins = "http://172.233.25.92:5001")
+@CrossOrigin(origins = "https://kamylaelourival.com.br")
 public class PaymentController {
 
     @Autowired
