@@ -36,7 +36,7 @@ public class PaymentServiceImpl implements PaymentService {
                     PreferenceItemRequest.builder()
                             .id(String.valueOf(produto.getId()))
                             .title(produto.getName())
-                            .description(produto.getDescription())
+                            .description(produto.getDescription()+"\n Mensagem de Felicitações: "+produto.getGiftMessage())
                             //.pictureUrl("http://www.myapp.com/myimage.jpg")
                             //.categoryId("car_electronics")
                             .quantity(1)
