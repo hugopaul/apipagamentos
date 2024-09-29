@@ -38,7 +38,7 @@ public class PaymentServiceImpl implements PaymentService {
                             .title(produto.getName())
                             .description(produto.getDescription()+"\n Mensagem de Felicitações: "+produto.getGiftMessage())
                             //.pictureUrl("http://www.myapp.com/myimage.jpg")
-                            .categoryId(produto.getName())
+                            //.categoryId(produto.getName())
                             .quantity(1)
                             .currencyId("BRL")
                             .unitPrice(parsePrice(produto.getPrice()))
