@@ -31,5 +31,5 @@ mercadopago:
   token: APP_USR-3426870832768207-092909-a4262fd852c5ab88671cc8620e268435-213709863
 
 cors:
-  config: "https://kamylaelourival.com.br" # "*"
-# cors.config: https://kamylaelourival.com.br
+ # config: "https://kamylaelourival.com.br" # "*"
+  config: *
