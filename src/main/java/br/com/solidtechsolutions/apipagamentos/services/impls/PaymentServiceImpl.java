@@ -30,7 +30,7 @@ public class PaymentServiceImpl implements PaymentService {
     public ResponseEntity<String> executePayment(Produto produto) {
         try {
 
-            boolean patialyPayment = produto.getPrice() != null;
+            boolean patialyPayment = produto.getPrice() == null || produto.getPrice().isEmpty() || produto.getPrice().isBlank();
 
             MercadoPagoConfig.setAccessToken(authToken);
             PreferenceClient client = new PreferenceClient();
