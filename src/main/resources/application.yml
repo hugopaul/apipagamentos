@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: apipagamentos
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: a2FteWxhZWxvdXJpdmFs
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: full
+
+mercadopago:
+  token: APP_USR-3426870832768207-092909-a4262fd852c5ab88671cc8620e268435-213709863
+
+cors:
+  config: "*"
+# cors.config: https://kamylaelourival.com.br
