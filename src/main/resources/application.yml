@@ -32,4 +32,4 @@ mercadopago:
 
 cors:
  # config: "https://kamylaelourival.com.br" # "*"
-  config: *
+  config: "*"
