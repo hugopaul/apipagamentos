@@ -1,20 +1,44 @@
 package br.com.solidtechsolutions.apipagamentos.controllers;
 
+import br.com.solidtechsolutions.apipagamentos.services.PaymentService;
+import br.com.solidtechsolutions.apipagamentos.services.impls.ProductService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-@RequestMapping("/success")
 @RestController
+@RequestMapping("/success")
+@CrossOrigin(origins = "${cors.config}")
 @Slf4j
-@CrossOrigin(origins = "https://kamylaelourival.com.br")
 public class SuccessController {
 
-    @GetMapping
-    public RedirectView pagamento(){
+    @Autowired
+    private PaymentService paymentService;
+
+    @Autowired
+    private ProductService productService;
+
+    // Atualiza o produto como completamente pago
+    @GetMapping("/{id}")
+    public RedirectView productFullyPayment(@PathVariable Long id) {
+        // Chama o serviço para marcar o produto como completamente pago
+        productService.updateProductAsFullyPaid(id);
+
+        // Redireciona para a página de sucesso
+        String redirectUrl = "https://kamylaelourival.com.br/weddingshop/";
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl(redirectUrl);
+        return redirectView;
+    }
+
+    // Atualiza o produto com um pagamento parcial
+    @GetMapping("/{id}/quotas/{payedQuotes}")
+    public RedirectView partialyProductPayment(@PathVariable Long id, @PathVariable String payedQuotes) {
+        // Chama o serviço para atualizar o pagamento parcial
+        productService.updateProductWithPartialPayment(id, payedQuotes);
+
+        // Redireciona para a página de sucesso
         String redirectUrl = "https://kamylaelourival.com.br/weddingshop/";
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl(redirectUrl);

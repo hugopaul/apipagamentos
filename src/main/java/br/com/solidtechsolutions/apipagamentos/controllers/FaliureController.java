@@ -1,15 +1,12 @@
 package br.com.solidtechsolutions.apipagamentos.controllers;
 
-import br.com.solidtechsolutions.apipagamentos.models.Produto;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 @RequestMapping("/failure")
 @RestController
-@Slf4j
-@CrossOrigin(origins = "https://kamylaelourival.com.br")
+@CrossOrigin(origins = "${cors.config}")
 public class FaliureController {
 
     @GetMapping

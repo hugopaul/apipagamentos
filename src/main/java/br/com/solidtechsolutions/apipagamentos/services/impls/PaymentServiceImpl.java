@@ -30,6 +30,8 @@ public class PaymentServiceImpl implements PaymentService {
     public ResponseEntity<String> executePayment(Produto produto) {
         try {
 
+            boolean patialyPayment = produto.getPrice() != null;
+
             MercadoPagoConfig.setAccessToken(authToken);
             PreferenceClient client = new PreferenceClient();
             PreferenceItemRequest itemRequest =
@@ -41,7 +43,7 @@ public class PaymentServiceImpl implements PaymentService {
                             //.categoryId(produto.getName())
                             .quantity(1)
                             .currencyId("BRL")
-                            .unitPrice(parsePrice(produto.getPrice()))
+                            .unitPrice(parsePrice(produto))
                             .build();
             List<PreferenceItemRequest> items = new ArrayList<>();
             items.add(itemRequest);
@@ -59,7 +61,7 @@ public class PaymentServiceImpl implements PaymentService {
             PreferenceRequest preferenceRequest = PreferenceRequest.builder()
                     .backUrls(
                             PreferenceBackUrlsRequest.builder()
-                                    .success("https://solidtechsolutions.com.br/success")
+                                    .success(getSuccessUrl(patialyPayment, produto))
                                     .failure("https://solidtechsolutions.com.br/failure")
                                     .pending("https://solidtechsolutions.com.br/pending")
                                     .build())
@@ -129,11 +131,24 @@ public class PaymentServiceImpl implements PaymentService {
         }
     }
 
+    private String getSuccessUrl(boolean patialyPayment, Produto produto) {
+        if (patialyPayment){
+            return  "https://solidtechsolutions.com.br/success/" + produto.getId() +"/quotas/"+produto.getQuotaQuantity();
+        }else {
+            return "https://solidtechsolutions.com.br/success/"+produto.getId();
+        }
+
+    }
 
 
-
-    private BigDecimal parsePrice(String priceStr) {
+    private BigDecimal parsePrice(Produto produto) {
         // Attempt to parse the price using the US locale (dollar format)
+        String priceStr;
+        if (produto.getPrice() != null){
+            priceStr = produto.getPrice();
+        }else{
+            priceStr = produto.getTotalPrice();
+        }
         Double valor = Double.valueOf(priceStr.replaceAll(",", "."));
         return BigDecimal.valueOf(valor);
     }

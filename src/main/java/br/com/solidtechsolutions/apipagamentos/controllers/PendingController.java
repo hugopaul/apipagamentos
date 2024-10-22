@@ -10,7 +10,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("/pending")
 @RestController
 @Slf4j
-@CrossOrigin(origins = "https://kamylaelourival.com.br")
+@CrossOrigin(origins = "${cors.config}")
 public class PendingController {
 
     @GetMapping
