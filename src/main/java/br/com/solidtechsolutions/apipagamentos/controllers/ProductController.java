@@ -1,7 +1,9 @@
 package br.com.solidtechsolutions.apipagamentos.controllers;
 
 import br.com.solidtechsolutions.apipagamentos.models.Product;
+import br.com.solidtechsolutions.apipagamentos.models.Review;
 import br.com.solidtechsolutions.apipagamentos.services.impls.ProductService;
+import br.com.solidtechsolutions.apipagamentos.services.impls.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,9 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ReviewService reviewService;
 
     @GetMapping
     public List<Product> getAllProducts() {
@@ -61,5 +66,11 @@ public class ProductController {
     public ResponseEntity<List<Product>> getRandomProducts() {
         List<Product> randomProducts = productService.getRandomProducts();
         return ResponseEntity.ok(randomProducts);
+    }
+
+    // Endpoint para adicionar um review a um produto existente
+    @PostMapping("/{productId}/reviews")
+    public void addReview(@PathVariable Long productId, @RequestBody Review newReview) {
+        Product updatedProduct = reviewService.addReviewToProduct(productId, newReview);
     }
 }
