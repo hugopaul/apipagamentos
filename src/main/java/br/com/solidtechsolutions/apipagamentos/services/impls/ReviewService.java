@@ -7,10 +7,13 @@ import br.com.solidtechsolutions.apipagamentos.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class ReviewService {
+
 
     @Autowired
     private ProductRepository productRepository;
@@ -19,6 +22,9 @@ public class ReviewService {
     public Product addReviewToProduct(Long productId, Review newReview) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+        // Define a data e hora atual para o novo review
+        newReview.setDataReview(new Date());
 
         // Adiciona o novo review à lista de reviews do produto
         List<Review> reviews = product.getReviews();

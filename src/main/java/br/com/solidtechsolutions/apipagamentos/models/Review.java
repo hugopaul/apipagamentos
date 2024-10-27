@@ -6,6 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 @Entity
 public class Review {
@@ -19,4 +21,6 @@ public class Review {
     private String comment;
 
     private boolean enable;
+
+    private Date dataReview;
 }
