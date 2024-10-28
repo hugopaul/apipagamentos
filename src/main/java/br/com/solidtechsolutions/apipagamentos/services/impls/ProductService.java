@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -57,24 +58,34 @@ public class ProductService {
     }
 
     // Marca o produto como completamente pago
-    public void updateProductAsFullyPaid(Long productId) {
+    public void updateProductAsFullyPaid(Long productId, Long reviewId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
 
         // Define quotasPurchased igual a quotasTotals (pagamento completo)
         product.setQuotasPurchased(product.getQuotasTotals());
 
+        product.getReviews().stream()
+                .filter(review -> Objects.equals(review.getId(), reviewId))
+                .findFirst()
+                .ifPresent(review -> review.setEnable(true));
+
         // Atualiza o produto no banco de dados
         productRepository.save(product);
     }
 
     // Atualiza o produto com um pagamento parcial
-    public void updateProductWithPartialPayment(Long productId, String payedQuotes) {
+    public void updateProductWithPartialPayment(Long productId, String payedQuotes, Long reviewId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
 
         // Atualiza o valor de quotasPurchased somando o payedQuotes
         product.setQuotasPurchased(String.valueOf(Integer.valueOf(product.getQuotasPurchased()) + (Integer.valueOf(payedQuotes))));
+
+        product.getReviews().stream()
+                .filter(review -> Objects.equals(review.getId(), reviewId))
+                .findFirst()
+                .ifPresent(review -> review.setEnable(true));
 
         // Atualiza o produto no banco de dados
         productRepository.save(product);

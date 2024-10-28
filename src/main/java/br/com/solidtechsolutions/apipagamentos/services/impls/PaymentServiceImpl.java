@@ -133,9 +133,11 @@ public class PaymentServiceImpl implements PaymentService {
 
     private String getSuccessUrl(boolean patialyPayment, Produto produto) {
         if (patialyPayment){
-            return  "https://solidtechsolutions.com.br/success/" + produto.getId() +"/quotas/"+produto.getQuotaQuantity();
+            return  "https://solidtechsolutions.com.br/success/" + produto.getId() +"/quotas/"+produto.getQuotaQuantity()
+                    +"/review/"+produto.getIdReview();
         }else {
-            return "https://solidtechsolutions.com.br/success/"+produto.getId();
+            return "https://solidtechsolutions.com.br/success/"+produto.getId()+
+                    "/review/"+produto.getIdReview();
         }
 
     }
