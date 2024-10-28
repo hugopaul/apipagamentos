@@ -70,7 +70,7 @@ public class ProductController {
 
     // Endpoint para adicionar um review a um produto existente
     @PostMapping("/{productId}/reviews")
-    public void addReview(@PathVariable Long productId, @RequestBody Review newReview) {
-        Product updatedProduct = reviewService.addReviewToProduct(productId, newReview);
+    public Product addReview(@PathVariable Long productId, @RequestBody Review newReview) {
+        return reviewService.addReviewToProduct(productId, newReview);
     }
 }
