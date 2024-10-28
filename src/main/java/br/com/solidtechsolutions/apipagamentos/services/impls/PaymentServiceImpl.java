@@ -15,10 +15,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
@@ -140,13 +137,11 @@ public class PaymentServiceImpl implements PaymentService {
         Product product = productService.getProductById(Long.valueOf(produto.getId()))
                 .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado com o ID: " + produto.getId()));
 
-        // Busca o ID do último review baseado na data mais recente
+        // Busca o ID do último review baseado no maior ID
         Long lastReviewId = product.getReviews().stream()
-                .sorted((review1, review2) -> review2.getDataReview().compareTo(review1.getDataReview())) // Ordena pela data decrescente
-                .findFirst()
+                .max(Comparator.comparingLong(Review::getId)) // Busca o review com o maior ID
                 .map(Review::getId) // Mapeia para o ID do review
                 .orElse(null); // Caso não encontre um review, retorna null
-
 
 
         // Retorna a URL de sucesso com o ID do último review
