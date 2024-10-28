@@ -1,6 +1,8 @@
 package br.com.solidtechsolutions.apipagamentos.services.impls;
 
+import br.com.solidtechsolutions.apipagamentos.models.Product;
 import br.com.solidtechsolutions.apipagamentos.models.Produto;
+import br.com.solidtechsolutions.apipagamentos.models.Review;
 import br.com.solidtechsolutions.apipagamentos.services.PaymentService;
 import com.mercadopago.MercadoPagoConfig;
 import com.mercadopago.client.preference.*;
@@ -16,10 +18,13 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
+    @Autowired
+    private ProductService productService;
 
     @Value("${mercadopago.token}")
     private String authToken;
@@ -132,15 +137,28 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     private String getSuccessUrl(boolean patialyPayment, Produto produto) {
-        if (patialyPayment){
-            return  "https://solidtechsolutions.com.br/success/" + produto.getId() +"/quotas/"+produto.getQuotaQuantity()
-                    +"/review/"+produto.getIdReview();
-        }else {
-            return "https://solidtechsolutions.com.br/success/"+produto.getId()+
-                    "/review/"+produto.getIdReview();
-        }
+        Product product = productService.getProductById(Long.valueOf(produto.getId()))
+                .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado com o ID: " + produto.getId()));
 
+        // Busca o ID do último review baseado na data mais recente
+        Long lastReviewId = product.getReviews().stream()
+                .sorted((review1, review2) -> review2.getDataReview().compareTo(review1.getDataReview())) // Ordena pela data decrescente
+                .findFirst()
+                .map(Review::getId) // Mapeia para o ID do review
+                .orElse(null); // Caso não encontre um review, retorna null
+
+
+
+        // Retorna a URL de sucesso com o ID do último review
+        if (patialyPayment) {
+            return "https://solidtechsolutions.com.br/success/" + produto.getId() + "/quotas/" + produto.getQuotaQuantity()
+                    + "/review/" + lastReviewId;
+        } else {
+            return "https://solidtechsolutions.com.br/success/" + produto.getId()
+                    + "/review/" + lastReviewId;
+        }
     }
+
 
 
     private BigDecimal parsePrice(Produto produto) {
