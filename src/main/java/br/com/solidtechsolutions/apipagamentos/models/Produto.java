@@ -16,6 +16,6 @@ public class Produto {
     private String pricePerQuota;
     private String quotaQuantity;
     private String totalPrice;
-    private Long idReview;
+    private String idReview;
 
 }
