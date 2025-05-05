@@ -2,9 +2,9 @@ spring:
   application:
     name: apipagamentos
   datasource:
-    url: jdbc:postgresql://172.233.25.92:5432/postgres
-    username: postgres
-    password: a2FteWxhZWxvdXJpdmFs
+    url: jdbc:postgresql://172.233.26.93:5432/solidtechsolutions
+    username: solidtechsolutions
+    password: Reisapao123*
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -31,5 +31,5 @@ mercadopago:
   token: APP_USR-3426870832768207-092909-a4262fd852c5ab88671cc8620e268435-213709863
 
 cors:
-  config: "https://kamylaelourival.com.br" # "*"
-  #config: "*"
+  #config: "https://shop.karoleeduardo.com.br" # "*"
+  config: "*"

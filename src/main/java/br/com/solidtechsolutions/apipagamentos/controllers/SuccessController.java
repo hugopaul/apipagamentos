@@ -27,7 +27,7 @@ public class SuccessController {
         productService.updateProductAsFullyPaid(id,reviewId);
 
         // Redireciona para a página de sucesso
-        String redirectUrl = "https://kamylaelourival.com.br/weddingshop/";
+        String redirectUrl = "https://shop.karoleeduardo.com.br/";
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl(redirectUrl);
         return redirectView;
@@ -42,7 +42,7 @@ public class SuccessController {
         productService.updateProductWithPartialPayment(id, payedQuotes, reviewId);
 
         // Redireciona para a página de sucesso
-        String redirectUrl = "https://kamylaelourival.com.br/weddingshop/";
+        String redirectUrl = "https://shop.karoleeduardo.com.br/";
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl(redirectUrl);
         return redirectView;

@@ -11,7 +11,7 @@ public class FaliureController {
 
     @GetMapping
     public RedirectView pagamento(){
-        String redirectUrl = "https://kamylaelourival.com.br/weddingshop/";
+        String redirectUrl = "https://shop.karoleeduardo.com.br/";
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl(redirectUrl);
         return redirectView;
