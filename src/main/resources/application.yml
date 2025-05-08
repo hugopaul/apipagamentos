@@ -31,5 +31,5 @@ mercadopago:
   token: APP_USR-1440248300513896-050819-8b747ae87bea9ccdae3a38e2421c1c15-261919822
 
 cors:
-  #config: "https://shop.karoleeduardo.com.br" # "*"
-  config: "*"
+  config: "https://shop.karoleeduardo.com.br" # "*"
+  #config: "*"
