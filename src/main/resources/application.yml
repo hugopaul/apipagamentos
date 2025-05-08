@@ -28,7 +28,7 @@ feign:
         loggerLevel: full
 
 mercadopago:
-  token: APP_USR-3426870832768207-092909-a4262fd852c5ab88671cc8620e268435-213709863
+  token: APP_USR-1440248300513896-050819-8b747ae87bea9ccdae3a38e2421c1c15-261919822
 
 cors:
   #config: "https://shop.karoleeduardo.com.br" # "*"
