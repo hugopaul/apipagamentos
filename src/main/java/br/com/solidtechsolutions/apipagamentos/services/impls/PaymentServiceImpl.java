@@ -129,7 +129,7 @@ public class PaymentServiceImpl implements PaymentService {
 
             return ResponseEntity.ok(preference.getInitPoint());
         }catch (Exception e){
-            return ResponseEntity.badRequest().body("erri ao gerar pagamento");
+            return ResponseEntity.badRequest().body("erro ao gerar pagamento");
         }
     }
 
